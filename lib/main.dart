@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app_bar.dart';
+import 'package:todo_app/constants/basic_constants.dart';
+
+import 'home_page/categories.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -49,8 +52,29 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: AppBarWidget(),
+    return  Scaffold(
+      body: Column(
+        children: [
+          const AppBarWidget(),
+          Container(
+            alignment:Alignment.topLeft,
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(20,40,0,0),
+              child: Text("What's Up, ${Constants.username}",style: TextStyle(
+                fontWeight: FontWeight.bold,fontSize: 40 ,fontFamily: "mukta"
+              )),
+            ),
+          ),
+          Builder(
+            builder: (context) {
+              return Container(
+                child: CategoriesWidget(),
+              );
+            }
+          )
+        ],
+
+      )
     );
   }
 }

@@ -1,23 +1,41 @@
-
 import 'package:flutter/material.dart';
 import 'package:todo_app/app_color/app_colors.dart';
 
-class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppBarWidget extends StatelessWidget {
   const AppBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:  GestureDetector(
-        onTap: null,
+    return SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: Container(child: Icon(Icons.menu,size: 40.0,color: AppColor.grey),height: 100.0,),
-        ),
-      ),
+          padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                  onTap: null,
+                  child: Icon(Icons.menu, size: 35.0, color: AppColor.grey,),
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0),
+                    child: GestureDetector(
+                        onTap: null,
+                        child: Icon(
+                          Icons.search, size: 35.0, color: AppColor.grey,),
+                    ),
+                  ),
+                  GestureDetector(
+                      onTap: null,
+                      child: Icon(
+                        Icons.notifications_none_outlined, size: 35.0, color: AppColor.grey,),
+                  ),
+                ],
+              )
+            ],
+          ),
+        )
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
