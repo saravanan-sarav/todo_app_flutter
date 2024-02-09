@@ -13,7 +13,7 @@ class CategoryList{
 }
 
  final List<CategoryList> categories = [
-  CategoryList(1,"Business", 0.8, Colors.red,"30"),
+  CategoryList(1,"Business", 0.8, Colors.yellow,"30"),
   CategoryList(2,"Productivity", 0.2,Colors.green,"50"),
   CategoryList(3,"Entertainment", 0.3,Colors.blue,"20"),
   CategoryList(4,"Food", 0.8,Colors.yellow,"10"),
