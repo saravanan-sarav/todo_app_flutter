@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/add_todo_page/add_todo.dart';
 import 'package:todo_app/app_bar.dart';
 import 'package:todo_app/home_page/today_tasks.dart';
 
@@ -41,9 +42,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Center(
-            child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    AddTodo(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+              ),
+            );
+          },
+          shape: const StadiumBorder(),
+          backgroundColor: Colors.blue,
+          child: const Center(
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
           ),
         ),
         body: Column(
