@@ -38,22 +38,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void _navigateToAddTodoPage(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AddTodo()),
+    );
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    AddTodo(),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(opacity: animation, child: child);
-                },
-              ),
-            );
+            _navigateToAddTodoPage(context);
+            // Navigator.push(
+            //   context,
+            //   PageRouteBuilder(
+            //     pageBuilder: (context, animation, secondaryAnimation) =>
+            //         const AddTodo(),
+            //     transitionsBuilder:
+            //         (context, animation, secondaryAnimation, child) {
+            //       return FadeTransition(opacity: animation, child: child);
+            //     },
+            //   ),
+            // );
           },
           shape: const StadiumBorder(),
           backgroundColor: Colors.blue,

@@ -7,9 +7,9 @@ class TextFieldWidget extends StatelessWidget {
   final String? suffixText;
   final bool obscureText;
   final String hintText;
-  TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController;
 
-  TextFieldWidget({
+  const TextFieldWidget({
     super.key,
     this.prefixIcon,
     this.suffixIcon,
@@ -17,12 +17,13 @@ class TextFieldWidget extends StatelessWidget {
     required this.hintText,
     this.prefixText,
     this.suffixText,
+    required this.textEditingController,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: TextStyle(fontSize: 30.0),
+      style: const TextStyle(fontSize: 30.0),
       controller: textEditingController,
       obscureText: obscureText,
       cursorColor: Colors.blue,

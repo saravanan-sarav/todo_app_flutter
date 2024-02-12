@@ -22,20 +22,51 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
         ),
       ),
       Expanded(
-          child: ListView.builder(
-              itemCount: tasks.length,
-              itemBuilder: (context, index) => Container(
-                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    height: 70,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Row(
+        child: ListView.builder(
+          itemCount: tasks.length,
+          itemBuilder: (context, index) {
+            return Dismissible(
+                key: Key(tasks[index].taskName),
+                direction: DismissDirection.startToEnd,
+                onDismissed: (direction) {
+                  setState(() {
+                    tasks.removeAt(index);
+                  });
+                },
+                background: Container(
+                    alignment: Alignment.centerRight,
+                    color: Colors.white10,
+                    padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                    child: const Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Center(
+                        Icon(
+                          Icons.delete_outline,
+                          color: AppColor.grey,
+                        ),
+                        Text(
+                          "  This Item is deleted ",
+                          style: TextStyle(color: Colors.grey, fontSize: 25),
+                        )
+                      ],
+                    )),
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  height: 70,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(30)),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              tasks[index].isCompleted =
+                                  !tasks[index].isCompleted;
+                              setState(() {});
+                            },
                             child: Container(
                               width: 24,
                               height: 24,
@@ -45,7 +76,8 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
                                       color: tasks[index].color,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: tasks[index].color, // Customize border color
+                                        color: tasks[index].color,
+                                        // Customize border color
                                         width: 3.0,
                                       ),
                                     )
@@ -69,10 +101,15 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 30),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Container(
                           child: Text(
                             tasks[index].taskName,
+                            maxLines: null,
+                            // Maximum number of lines before wrapping
+                            overflow: TextOverflow.clip,
                             style: !tasks[index].isCompleted
                                 ? const TextStyle(
                                     fontSize: 20,
@@ -85,10 +122,14 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
                                     letterSpacing: 1,
                                     decoration: TextDecoration.lineThrough),
                           ),
-                        )
-                      ],
-                    ),
-                  ))),
+                        ),
+                      )
+                    ],
+                  ),
+                ));
+          },
+        ),
+      )
     ]);
   }
 }
