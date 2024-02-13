@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/add_todo_page/navigationBar.dart';
+import 'package:todo_app/app_color/app_colors.dart';
 import 'package:todo_app/custom_widget/TextFieldWidget.dart';
 import 'package:todo_app/model/tasks.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddTodo extends StatefulWidget {
   const AddTodo({super.key});
@@ -14,6 +16,7 @@ class _AddTodoState extends State<AddTodo> {
   final TextEditingController textEditingController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
+
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -42,7 +45,10 @@ class _AddTodoState extends State<AddTodo> {
               padding: EdgeInsets.only(right: 30.0, bottom: 50),
               child: NavigationBarWidget(),
             ),
-            TextFieldWidget(obscureText: false, hintText: "Enter the Task...",textEditingController :textEditingController),
+            TextFieldWidget(
+                obscureText: false,
+                hintText: "Enter the Task...",
+                textEditingController: textEditingController),
             Padding(
               padding: const EdgeInsets.only(right: 20.0, top: 20),
               child: Text(
@@ -81,7 +87,7 @@ class _AddTodoState extends State<AddTodo> {
                               child: Text(
                                 "Today",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 30),
+                                    fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                             )
                           ],
@@ -110,7 +116,7 @@ class _AddTodoState extends State<AddTodo> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.folder_copy_outlined,
+                    Icons.create_new_folder,
                     color: Colors.grey,
                   ),
                   Icon(
@@ -132,9 +138,19 @@ class _AddTodoState extends State<AddTodo> {
         height: 60,
         child: FloatingActionButton(
           onPressed: () {
-            Task task = Task(tasks.length + 1, 2, textEditingController.text, false, Colors.purple);
-            tasks.add(task);
-            Navigator.pop(context, task);
+            if (textEditingController.text.isNotEmpty) {
+              Task task = Task(tasks.length + 1, 2, textEditingController.text,
+                  false, AppColor.generateRandomColor());
+              Navigator.pop(context, task);
+            }else{
+              Fluttertoast.showToast(
+                msg: 'This is a toast message',
+                toastLength: Toast.LENGTH_SHORT, // Duration for how long the toast should be shown
+                gravity: ToastGravity.BOTTOM, // Position of the toast
+                backgroundColor: Colors.black.withOpacity(0.8), // Background color of the toast
+                textColor: Colors.white, // Text color of the toast message
+              );
+            }
           },
           shape: const StadiumBorder(),
           backgroundColor: Colors.blue,
@@ -144,7 +160,7 @@ class _AddTodoState extends State<AddTodo> {
                 padding: EdgeInsets.only(left: 30.0),
                 child: Text(
                   "Create ",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
               Icon(

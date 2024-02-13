@@ -3,13 +3,23 @@ import 'package:todo_app/app_color/app_colors.dart';
 import 'package:todo_app/model/tasks.dart';
 
 class TodayTaskWidget extends StatefulWidget {
-  const TodayTaskWidget({super.key});
+  const TodayTaskWidget({super.key, required this.tasksList});
+
+  final List<Task> tasksList;
 
   @override
   State<TodayTaskWidget> createState() => _TodayTaskWidgetState();
 }
 
 class _TodayTaskWidgetState extends State<TodayTaskWidget> {
+  late List<Task> tasksList;
+
+  @override
+  void initState() {
+    super.initState();
+    tasksList = widget.tasksList;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -23,14 +33,14 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
       ),
       Expanded(
         child: ListView.builder(
-          itemCount: tasks.length,
+          itemCount: tasksList.length,
           itemBuilder: (context, index) {
             return Dismissible(
-                key: Key(tasks[index].taskName),
+                key: Key(tasksList[index].taskName),
                 direction: DismissDirection.startToEnd,
                 onDismissed: (direction) {
                   setState(() {
-                    tasks.removeAt(index);
+                    tasksList.removeAt(index);
                   });
                 },
                 background: Container(
@@ -63,20 +73,20 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              tasks[index].isCompleted =
-                                  !tasks[index].isCompleted;
+                              tasksList[index].isCompleted =
+                                  !tasksList[index].isCompleted;
                               setState(() {});
                             },
                             child: Container(
                               width: 24,
                               height: 24,
                               // color: Colors.green,
-                              decoration: tasks[index].isCompleted
+                              decoration: tasksList[index].isCompleted
                                   ? BoxDecoration(
-                                      color: tasks[index].color,
+                                      color: tasksList[index].color,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: tasks[index].color,
+                                        color: tasksList[index].color,
                                         // Customize border color
                                         width: 3.0,
                                       ),
@@ -85,12 +95,12 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
                                       color: Colors.white,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: tasks[index].color,
+                                        color: tasksList[index].color,
                                         // Customize border color
                                         width: 3.0,
                                       ),
                                     ),
-                              child: tasks[index].isCompleted
+                              child: tasksList[index].isCompleted
                                   ? const Icon(
                                       Icons.check,
                                       size: 16,
@@ -104,24 +114,22 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 30),
-                        child: Container(
-                          child: Text(
-                            tasks[index].taskName,
-                            maxLines: null,
-                            // Maximum number of lines before wrapping
-                            overflow: TextOverflow.clip,
-                            style: !tasks[index].isCompleted
-                                ? const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1,
-                                  )
-                                : const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1,
-                                    decoration: TextDecoration.lineThrough),
-                          ),
+                        child: Text(
+                          tasksList[index].taskName,
+                          maxLines: null,
+                          // Maximum number of lines before wrapping
+                          overflow: TextOverflow.clip,
+                          style: !tasksList[index].isCompleted
+                              ? const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                )
+                              : const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                  decoration: TextDecoration.lineThrough),
                         ),
                       )
                     ],

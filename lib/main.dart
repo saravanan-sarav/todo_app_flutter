@@ -5,6 +5,7 @@ import 'package:todo_app/home_page/today_tasks.dart';
 
 import 'constants/basic_constants.dart';
 import 'home_page/categories.dart';
+import 'model/tasks.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -38,11 +39,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late List<Task> tasksList;
+
+  @override
+  void initState() {
+    super.initState();
+    tasksList = tasks;
+  }
+
   void _navigateToAddTodoPage(BuildContext context) async {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const AddTodo()),
     );
+    tasks.add(result);
     setState(() {});
   }
 
@@ -89,7 +99,10 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const CategoriesWidget(),
-            const Expanded(child: TodayTaskWidget()),
+            Expanded(
+                child: TodayTaskWidget(
+              tasksList: tasksList,
+            )),
           ],
         ));
   }

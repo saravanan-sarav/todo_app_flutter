@@ -56,7 +56,7 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                                       Text(
                                         categories[i].categoryName,
                                         style: const TextStyle(
-                                            fontSize: 30,
+                                            fontSize: 25,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ]),
