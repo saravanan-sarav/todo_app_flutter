@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:todo_app/add_todo_page/navigationBar.dart';
 import 'package:todo_app/app_color/app_colors.dart';
 import 'package:todo_app/custom_widget/TextFieldWidget.dart';
 import 'package:todo_app/model/tasks.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class AddTodo extends StatefulWidget {
   const AddTodo({super.key});
@@ -140,14 +140,17 @@ class _AddTodoState extends State<AddTodo> {
           onPressed: () {
             if (textEditingController.text.isNotEmpty) {
               Task task = Task(tasks.length + 1, 2, textEditingController.text,
-                  false, AppColor.generateRandomColor());
+                  false, AppColor.generateRandomColor(), _selectedDate);
               Navigator.pop(context, task);
-            }else{
+            } else {
               Fluttertoast.showToast(
-                msg: 'This is a toast message',
-                toastLength: Toast.LENGTH_SHORT, // Duration for how long the toast should be shown
-                gravity: ToastGravity.BOTTOM, // Position of the toast
-                backgroundColor: Colors.black.withOpacity(0.8), // Background color of the toast
+                msg: 'Please enter any task to add...',
+                toastLength: Toast.LENGTH_SHORT,
+                // Duration for how long the toast should be shown
+                gravity: ToastGravity.TOP,
+                // Position of the toast
+                backgroundColor: Colors.black,
+                // Background color of the toast
                 textColor: Colors.white, // Text color of the toast message
               );
             }
@@ -157,16 +160,16 @@ class _AddTodoState extends State<AddTodo> {
           child: const Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 30.0),
+                padding: EdgeInsets.only(left: 40.0),
                 child: Text(
                   "Create ",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ),
               Icon(
                 Icons.keyboard_arrow_up,
                 color: Colors.white,
-                size: 50,
+                size: 30,
               )
             ],
           ),

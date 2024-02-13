@@ -112,30 +112,38 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30),
-                        child: Text(
-                          tasksList[index].taskName,
-                          maxLines: null,
-                          // Maximum number of lines before wrapping
-                          overflow: TextOverflow.clip,
-                          style: !tasksList[index].isCompleted
-                              ? const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                )
-                              : const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                  decoration: TextDecoration.lineThrough),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: Text(
+                            tasksList[index].taskName,
+                            maxLines: null,
+                            // Maximum number of lines before wrapping
+                            overflow: TextOverflow.clip,
+                            style: !tasksList[index].isCompleted
+                                ? const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  )
+                                : const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                    decoration: TextDecoration.lineThrough),
+                          ),
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: Text(
+                            "${tasksList[index].createdDate.day}-${tasksList[index].createdDate.month}-${tasksList[index].createdDate.year}"),
                       )
                     ],
                   ),
                 ));
           },
+          reverse: true,
         ),
       )
     ]);
