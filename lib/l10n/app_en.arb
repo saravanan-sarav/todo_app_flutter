@@ -1,0 +1,12 @@
+{
+  "welcome_message": "What's Up",
+  "categories": "categories",
+  "today_Task": "Today's Task",
+  "create_button": "Create",
+  "user_status": "What's Up,  {username}!",
+  "@user_status": {
+    "placeholders": {
+      "username": {}
+    }
+  }
+}

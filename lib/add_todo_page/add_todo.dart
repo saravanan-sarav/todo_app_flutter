@@ -4,6 +4,8 @@ import 'package:todo_app/add_todo_page/navigationBar.dart';
 import 'package:todo_app/app_color/app_colors.dart';
 import 'package:todo_app/custom_widget/TextFieldWidget.dart';
 import 'package:todo_app/model/tasks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class AddTodo extends StatefulWidget {
   const AddTodo({super.key});
@@ -157,16 +159,16 @@ class _AddTodoState extends State<AddTodo> {
           },
           shape: const StadiumBorder(),
           backgroundColor: Colors.blue,
-          child: const Row(
+          child:  Row(
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 40.0),
+                padding: const EdgeInsets.only(left: 40.0),
                 child: Text(
-                  "Create ",
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+                  AppLocalizations.of(context)!.create_button,
+                  style: const TextStyle(color: Colors.white, fontSize: 15),
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.keyboard_arrow_up,
                 color: Colors.white,
                 size: 30,
@@ -178,3 +180,6 @@ class _AddTodoState extends State<AddTodo> {
     );
   }
 }
+
+
+

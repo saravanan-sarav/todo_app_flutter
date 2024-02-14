@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app_color/app_colors.dart';
 import 'package:todo_app/model/tasks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TodayTaskWidget extends StatefulWidget {
   const TodayTaskWidget({super.key, required this.tasksList});
@@ -23,11 +24,11 @@ class _TodayTaskWidgetState extends State<TodayTaskWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const Padding(
-        padding: EdgeInsets.fromLTRB(20, 30, 0, 20),
+       Padding(
+        padding: const EdgeInsets.fromLTRB(20, 30, 0, 20),
         child: Text(
-          "Today's Task",
-          style: TextStyle(
+          AppLocalizations.of(context)!.today_Task,
+          style: const TextStyle(
               fontSize: 25, fontWeight: FontWeight.bold, color: AppColor.grey),
         ),
       ),

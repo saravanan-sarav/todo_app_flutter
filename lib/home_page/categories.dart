@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:todo_app/app_color/app_colors.dart';
 import 'package:todo_app/model/categories.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CategoriesWidget extends StatefulWidget {
   const CategoriesWidget({super.key});
@@ -14,10 +16,10 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const Padding(
+       Padding(
         padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
         child: Text(
-          "Categories",
+          AppLocalizations.of(context)!.categories,
           style: TextStyle(
               fontSize: 25, fontWeight: FontWeight.bold, color: AppColor.grey),
         ),
